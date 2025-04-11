@@ -139,8 +139,9 @@ numberRange
  : Number ':' Number '=' value
  ;
 
+
 value
- : String | Number | Column | Bool
+ : String | Number | Column | Bool | BYTE_SIZE | TIME_DURATION
  ;
 
 ecommand
@@ -311,3 +312,24 @@ fragment Int
 fragment Digit
  : [0-9]
  ;
+// ---- BYTE SIZE SUPPORT ----
+BYTE_SIZE
+  : DIGIT+ ('.' DIGIT+)? BYTE_UNIT
+  ;
+
+// ---- TIME DURATION SUPPORT ----
+TIME_DURATION
+  : DIGIT+ ('.' DIGIT+)? TIME_UNIT
+  ;
+
+// ---- BYTE/TIME UNIT FRAGMENTS ----
+fragment BYTE_UNIT
+  : [kKmMgGtTpP] [bB]?
+  ;
+
+fragment TIME_UNIT
+  : 'ms' | 's' | 'sec' | 'seconds' | 'm' | 'min' | 'minutes' | 'h' | 'hr' | 'hours'
+  ;
+
+
+
